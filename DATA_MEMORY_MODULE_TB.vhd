@@ -42,7 +42,7 @@ ARCHITECTURE behavior OF DATA_MEMORY_MODULE_TB IS
     COMPONENT DATA_MEMORY_MODULE
     PORT(
          RST : IN  std_logic;
-         ALU_RESULT : IN  std_logic_vector(4 downto 0);
+         ALU_RESULT : IN  std_logic_vector(31 downto 0);
          cRD : IN  std_logic_vector(31 downto 0);
          WRDENMEM : IN  std_logic;
          DATATOMEM : OUT  std_logic_vector(31 downto 0)
