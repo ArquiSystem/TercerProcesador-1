@@ -19,7 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use ieee.std_logic_unsigned.all;
+use ieee.NUMERIC_STD.all;
 
 entity REGITER_FILE_MODULE is
     Port ( NRS1 : in  STD_LOGIC_VECTOR (5 downto 0);
@@ -50,11 +50,11 @@ begin
 			CRS2 <= (others =>'0');
 			CRD <=(OTHERS => '0');
 		ELSE
-			CRS1 <= RAM(conv_integer(NRS1));
-			CRS2 <= RAM(conv_integer(NRS2));
-			CRD <= RAM(CONV_INTEGER(NRD));
+			CRS1 <= RAM(TO_INTEGER(UNSIGNED(NRS1)));
+			CRS2 <= RAM(TO_INTEGER(UNSIGNED(NRS2)));
+			CRD <= RAM(TO_INTEGER(UNSIGNED(NRD)));
 			IF NRD /= "000000" AND WE = '1' THEN
-				RAM(conv_integer(NRD)) <= DATATOREG;
+				RAM(TO_INTEGER(UNSIGNED(NRD))) <= DATATOREG;
 			END IF;
 		END IF;
 	END PROCESS;

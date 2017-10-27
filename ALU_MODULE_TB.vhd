@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   22:11:13 10/22/2017
+-- Create Date:   22:51:53 10/24/2017
 -- Design Name:   
--- Module Name:   C:/Users/Stiven/Desktop/ARQUITECTURA/PROCESADOR/PROCESADOR_TB.vhd
+-- Module Name:   C:/Users/Stiven/Desktop/ARQUITECTURA/PROCESADOR/ALU_MODULE_TB.vhd
 -- Project Name:  PROCESADOR
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: PROCESADOR
+-- VHDL Test Bench Created by ISE for module: ALU_MODULE
 -- 
 -- Dependencies:
 -- 
@@ -32,57 +32,51 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY PROCESADOR_TB IS
-END PROCESADOR_TB;
+ENTITY ALU_MODULE_TB IS
+END ALU_MODULE_TB;
  
-ARCHITECTURE behavior OF PROCESADOR_TB IS 
+ARCHITECTURE behavior OF ALU_MODULE_TB IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT PROCESADOR
+    COMPONENT ALU_MODULE
     PORT(
-         CLK : IN  std_logic;
-         RST : IN  std_logic;
-         RESULT : OUT  std_logic_vector(31 downto 0)
+         ALUOP : IN  std_logic_vector(5 downto 0);
+         CRS1 : IN  std_logic_vector(31 downto 0);
+         OP2 : IN  std_logic_vector(31 downto 0);
+         C : IN  std_logic_vector(0 downto 0);
+         ALU_RESULT : OUT  std_logic_vector(31 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal CLK : std_logic := '0';
-   signal RST : std_logic := '0';
+   signal ALUOP : std_logic_vector(5 downto 0) := (others => '0');
+   signal CRS1 : std_logic_vector(31 downto 0) := (others => '0');
+   signal OP2 : std_logic_vector(31 downto 0) := (others => '0');
+   signal C : std_logic_vector(0 downto 0) := (others => '0');
 
  	--Outputs
-   signal RESULT : std_logic_vector(31 downto 0);
-
-   -- Clock period definitions
-   constant CLK_period : time := 10 ns;
+   signal ALU_RESULT : std_logic_vector(31 downto 0);
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: PROCESADOR PORT MAP (
-          CLK => CLK,
-          RST => RST,
-          RESULT => RESULT
+   uut: ALU_MODULE PORT MAP (
+          ALUOP => ALUOP,
+          CRS1 => CRS1,
+          OP2 => OP2,
+          C => C,
+          ALU_RESULT => ALU_RESULT
         );
-
-   -- Clock process definitions
-   CLK_process :process
-   begin
-		CLK <= '1';
-		wait for CLK_period/2;
-		CLK <= '0';
-		wait for CLK_period/2;
-   end process;
- 
 
    -- Stimulus process
    stim_proc: process
    begin		
-		RST<='1';
-		WAIT FOR 10 NS;
-		RST<='0';
+      ALUOP <= "000100";
+		CRS1 <= X"00000001";
+		OP2  <= X"00000001";
+		C	  <="0";
       wait;
    end process;
 

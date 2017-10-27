@@ -98,6 +98,7 @@ architecture Behavioral of PROCESADOR is
 	COMPONENT DATA_MEMORY_MODULE
 	PORT(
 		RST : IN std_logic;
+		CLK : IN STD_LOGIC;
 		ALU_RESULT : IN std_logic_vector(4 downto 0);
 		cRD : IN std_logic_vector(31 downto 0);
 		WRDENMEM : IN std_logic;          
@@ -310,6 +311,7 @@ BEGIN
 	);
 	Inst_DATA_MEMORY_MODULE: DATA_MEMORY_MODULE PORT MAP(
 		RST => RST,
+		CLK => CLK,
 		ALU_RESULT => AUX_ALU_RESULT(4 DOWNTO 0),
 		cRD => AUX_CRD,
 		WRDENMEM => AUX_WRDENMEM,
